@@ -20,7 +20,7 @@ class PageParser:
                 records.append({
                     "symbol": cols[1].text.strip(),
                     "name": cols[2].text.strip(),
-                    "price": float(cols[4].text.strip())
+                    "price": float(cols[4].text.strip().replace(',',''))
                 })
 
         return records

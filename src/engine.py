@@ -42,8 +42,22 @@ class ScraperEngine:
             raise
 
     def get_next_page(self):
-
-        botao_next = self.driver.find_element(By.CSS_SELECTOR, "button[aria-label='Next']")
+        try:
+            wait = WebDriverWait(self.driver, 10)
+            while True:
+                yield self.driver.page_source
+                botao_next = self.driver.find_element(By.CSS_SELECTOR, "button[aria-label='Goto next page']")
+                if not botao_next or not botao_next.is_enabled():
+                    break
+                symbol_before = self.driver.find_element(By.CSS_SELECTOR, "table tbody tr td").text
+                print(f'total text before: {symbol_before}')
+                self.driver.execute_script("arguments[0].click();", botao_next)
+                wait.until_not(
+                    EC.text_to_be_present_in_element((By.CSS_SELECTOR, "table tbody tr td"),symbol_before)
+                )
+            return None
+        except Exception as e:
+            print(f"Aconteceu um erro enquanto buscava as páginas: {e}")
 
 
     def _uncheck_all(self):
