@@ -3,8 +3,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
-import time
-
 URL = 'https://finance.yahoo.com/research-hub/screener/equity/'
 
 class ScraperEngine:
@@ -16,7 +14,6 @@ class ScraperEngine:
     def start_navigation(self):
         try:
             self.driver.get(URL)
-            #self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "table.yf-1uayyp1")))
         except Exception as e:
             print(f"Erro ao carregar a página: {e}")
             raise
@@ -43,6 +40,11 @@ class ScraperEngine:
         except Exception as e:
             print(f"Problema ao aplicar filtro: {e}")
             raise
+
+    def get_next_page(self):
+
+        botao_next = self.driver.find_element(By.CSS_SELECTOR, "button[aria-label='Next']")
+
 
     def _uncheck_all(self):
 
