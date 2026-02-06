@@ -1,5 +1,8 @@
 from engine import ScraperEngine
+from parser import PageParser
 
-se = ScraperEngine()
-se.start_navigation()
-se.apply_filter("Brazil")
+scraper = ScraperEngine()
+parser = PageParser()
+scraper.start_navigation()
+scraper.apply_filter("Brazil")
+print(parser.extract_table_data(scraper.driver.page_source))

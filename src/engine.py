@@ -16,7 +16,7 @@ class ScraperEngine:
     def start_navigation(self):
         try:
             self.driver.get(URL)
-            self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "table.yf-1uayyp1")))
+            #self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "table.yf-1uayyp1")))
         except Exception as e:
             print(f"Erro ao carregar a página: {e}")
             raise
@@ -40,12 +40,9 @@ class ScraperEngine:
 
             self.wait.until(EC.invisibility_of_element_located((By.XPATH, "//*[contains(text(), 'Apply')]")))
 
-            time.sleep(10)
-
         except Exception as e:
             print(f"Problema ao aplicar filtro: {e}")
             raise
-
 
     def _uncheck_all(self):
 
