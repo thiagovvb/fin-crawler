@@ -13,7 +13,7 @@ def main():
         logger.error("Parâmetro não informado")
         return
     
-    filter = sys.argv[1]
+    filter = sys.argv[1].strip("\"")
 
     with ScraperEngine() as scraper:
         parser = PageParser()
@@ -25,6 +25,8 @@ def main():
         i = 1
         for page in scraper.get_next_page():
             logger.info(f"Processando página {i}")
+            if i == 1:
+                print(page)
             data.extend(parser.extract_table_data(page))
             i += 1
 
