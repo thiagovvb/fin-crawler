@@ -25,8 +25,6 @@ def main():
         i = 1
         for page in scraper.get_next_page():
             logger.info(f"Processando página {i}")
-            if i == 1:
-                print(page)
             data.extend(parser.extract_table_data(page))
             i += 1
 
