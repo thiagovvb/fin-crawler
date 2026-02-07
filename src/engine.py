@@ -4,7 +4,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from utils.logger import Logger
-from tenacity import retry, stop_after_attempt, wait_fixed
 
 URL = 'https://finance.yahoo.com/research-hub/screener/equity/'
 
@@ -26,7 +25,6 @@ class ScraperEngine:
             self.logger.info("Fechando driver.")
             self.driver.quit()
 
-    @retry()
     def start_navigation(self):
         try:
             self.driver.get(URL)
@@ -99,8 +97,7 @@ class ScraperEngine:
                 self.wait.until(EC.visibility_of_element_located((By.XPATH, "//input[@placeholder='Search...']")))
                 return True
             except Exception as e:
-                self.logger.error(f"Houve um erro ao abrir o menu região: {e}")
-                raise
+                pass
         return False
 
     

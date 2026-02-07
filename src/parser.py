@@ -20,7 +20,13 @@ class PageParser:
                 records.append({
                     "symbol": cols[1].text.strip(),
                     "name": cols[2].text.strip(),
-                    "price": float(cols[4].text.strip().replace(',',''))
+                    "price": self._parse_price(cols[4].text.strip())
                 })
 
         return records
+    
+    def _parse_price(self, text):
+        try:
+            return float(text.replace(',',''))
+        except ValueError:
+            return None
