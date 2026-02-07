@@ -16,6 +16,8 @@ Crawler simples para coletar dados de ações a partir do Yahoo Finance Screener
 
 python src/main.py "País"
 
+Importante! O nome do país deve estar entre aspas
+
 O parâmetro é o nome da região exatamente como aparece no filtro de "Region" do screener
 
 ## Saída
